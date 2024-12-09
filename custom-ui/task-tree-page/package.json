@@ -1,0 +1,44 @@
+{
+  "name": "soufeelings-task-tree",
+  "version": "0.1.8",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@atlaskit/select": "^16.5.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.3.3",
+    "@atlaskit/css-reset": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.13.1",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "start": "PORT=3000 react-scripts start",
+    "build": "npm run lint && react-scripts build && rm -R -f ../../forge/static/task-tree-page && mkdir -p ../../forge/static/task-tree-page && mv build ../../forge/static/task-tree-page",
+    "lint": "eslint './src/**/*.*' --fix",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

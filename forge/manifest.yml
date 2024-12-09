@@ -1,0 +1,30 @@
+modules:
+  jira:projectPage:
+    - key: soulfeelings-project-page
+      icon: resource:task-tree-resource;icons/icon.png
+      resolver:
+        function: resolver
+      title: SoulFeelings
+      resource: task-tree-resource
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: task-tree-resource
+    path: static/task-tree-page/build
+    tunnel:
+      port: 3000
+app:
+  runtime:
+    name: nodejs20.x
+  licensing:
+    enabled: true
+  id: ari:cloud:ecosystem::app/ec6d460e-360c-4d5f-865c-7468b1a8da72
+permissions:
+  scopes:
+    - read:jira-work
+  content:
+    styles:
+      - unsafe-inline
+    scripts:
+      - unsafe-inline
