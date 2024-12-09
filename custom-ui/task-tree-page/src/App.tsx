@@ -27,7 +27,9 @@ function App() {
 
   const getIssuesForSprints = async () => {
     console.log("getIssuesForSprints");
+    console.log(sprints);
     if (sprints && sprints.length > 0) {
+      console.log("getIssuesForSprints enter");
       const tempSprintIssues: ITreeIssues = {};
       // eslint-disable-next-line no-restricted-syntax
       for (const sprint of sprints) {
@@ -42,6 +44,32 @@ function App() {
       setSprintIssues(tempSprintIssues);
     }
   };
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    const executeFunction = async () => {
+      try {
+        console.log("Async function started");
+        if (!isCancelled) {
+          await getIssuesForSprints();
+        }
+      } catch (error) {
+        console.error("Error in async function:", error);
+      }
+    };
+
+    // Set interval to execute every 60 seconds
+    const intervalId = setInterval(() => {
+      executeFunction();
+    }, 15000);
+
+    // Cleanup interval and cancel ongoing async tasks
+    return () => {
+      isCancelled = true;
+      clearInterval(intervalId);
+    };
+  }, [sprints]);
 
   useEffect(() => {
     (async () => {
@@ -68,7 +96,6 @@ function App() {
   const setSprintValue = async (value: Array<ISprintOption>) => {
     setSprints(value);
   };
-  setInterval(getIssuesForSprints, 30000);
   return (
     <>
       {context?.extension?.project?.id && (
