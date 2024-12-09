@@ -4,11 +4,14 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@atlaskit/css-reset": "^6.0.1",
+    "@atlaskit/form": "^10.6.2",
     "@atlaskit/select": "^16.5.0",
+    "@atlaskit/spinner": "^16.3.4",
+    "@forge/bridge": "^4.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.3.3",
-    "@atlaskit/css-reset": "^6.0.1"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@types/react": "^16.13.1",
