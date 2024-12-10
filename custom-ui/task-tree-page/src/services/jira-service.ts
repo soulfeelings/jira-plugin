@@ -33,13 +33,11 @@ export const getSprintsForBoard = async (
   boardId: string | undefined,
   filter: string
 ): Promise<Array<ISprintOption>> => {
-  console.log("here", filter);
   if (boardId) {
     const response = await requestJira(
       `/rest/agile/1.0/board/${boardId}/sprint`
     );
     const sprintResponse = (await response.json()) as ISprintResponse;
-    console.log(sprintResponse);
     const sprints = sprintResponse.values.map((sprint) => ({
       value: sprint.id.toString(),
       label: sprint,
@@ -57,6 +55,5 @@ export const getSprintIssues = async (sprintId): Promise<Array<IIssue>> => {
     `/rest/agile/1.0/sprint/${sprintId}/issue?fields=status`
   );
   const sprintIssueResponse = (await response.json()) as ISprintIssuesResponse;
-  console.log(sprintIssueResponse);
   return sprintIssueResponse.issues;
 };

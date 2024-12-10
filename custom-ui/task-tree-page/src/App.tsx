@@ -12,6 +12,7 @@ import {
   ITreeIssues,
 } from "./models/Jira";
 import { getSprintIssues } from "./services/jira-service";
+import TaskTree from "./components/TaskTree";
 
 const MainDiv = styled.div`
   width: 400px;
@@ -26,21 +27,15 @@ function App() {
   );
 
   const getIssuesForSprints = async () => {
-    console.log("getIssuesForSprints");
-    console.log(sprints);
     if (sprints && sprints.length > 0) {
-      console.log("getIssuesForSprints enter");
       const tempSprintIssues: ITreeIssues = {};
       // eslint-disable-next-line no-restricted-syntax
       for (const sprint of sprints) {
         tempSprintIssues[sprint.label.name] = [];
         // eslint-disable-next-line no-await-in-loop
         const tempIssueSprints = await getSprintIssues(sprint.label.id);
-        console.log(tempIssueSprints);
         tempSprintIssues[sprint.label.name] = tempIssueSprints;
       }
-      console.log(sprintIssues);
-      console.log(tempSprintIssues);
       setSprintIssues(tempSprintIssues);
     }
   };
@@ -50,7 +45,6 @@ function App() {
 
     const executeFunction = async () => {
       try {
-        console.log("Async function started");
         if (!isCancelled) {
           await getIssuesForSprints();
         }
@@ -124,6 +118,7 @@ function App() {
             setValue={setSprintValue}
             boardId={board?.label.id ? board?.label.id.toString() : undefined}
           />
+          <TaskTree treeIssues={sprintIssues} />
         </MainDiv>
       )}
       {context?.extension?.project?.id === undefined && <Spinner />}
